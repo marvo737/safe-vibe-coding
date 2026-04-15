@@ -1,0 +1,19 @@
+{
+  "name": "safe-vibe-coding",
+  "version": "0.1.0",
+  "description": "AI支援コーディング(バイブコーディング)で致命的失敗を避けるための6つのガードレールスキル集。セキュリティ・コスト・法務・データ設計・性能・インシデント対応を個別スキルで提供。",
+  "author": "marvo",
+  "license": "MIT",
+  "keywords": [
+    "vibe-coding",
+    "ai-coding",
+    "safety",
+    "guardrails",
+    "security",
+    "cost",
+    "legal",
+    "data-design",
+    "performance",
+    "incident-response"
+  ]
+}
