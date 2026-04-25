@@ -1,0 +1,8 @@
+{
+  "name": "safe-vibe-coding",
+  "version": "0.1.0",
+  "description": "Guardrail skills to avoid catastrophic failures during AI-assisted vibe coding (security, cost, performance, durability, legal, incident response).",
+  "author": {
+    "name": "marvo"
+  }
+}
