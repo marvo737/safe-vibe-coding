@@ -24,6 +24,7 @@ description: Use when implementing authentication, authorization, file uploads, 
 | APIキー漏洩 | `.env` / Secrets Manager、`.gitignore` 登録 | コミット前grepで秘匿文字列検査 |
 | IDOR | サーバー側で `resource.userId === session.userId` を毎回検証 | 他人のIDで叩いて403確認 |
 | S3/バケット誤公開 | Public Access Block有効、bucket policyレビュー | `aws s3api get-public-access-block` |
+| 半外部スコープ(社外協力会社・取引先) | 全公開ではなく認可手段を選ぶ: ①CloudFront Signed Cookie(TTL を意識せず通常URL動作) ②WAF IP allow-list ③IAM Identity Center 発行 ④Cognito 別プール | 「社外も使うから public」は誤り。Signed Cookie なら TTL 数時間〜セッション期間で UX 担保可 |
 | SG `0.0.0.0/0` 開放 | 必要ポートのみ、管理ポートは自IP限定 | ingress rules を列挙 |
 | ファイルアップロード悪用 | 拡張子 + MIMEタイプ + マジックナンバーの **3点判定** | 形式ごとのシグネチャを検証(libmagic / `file-type` 等のライブラリ推奨。PNGは8B、JPEGは先頭3B、PDFは5B、ZIP/Officeは4B、MP4は`ftyp`など形式依存) |
 | エラー詳細漏洩 | 本番は一般化メッセージのみ返却、詳細はサーバーログへ | 本番レスポンスにstack traceが無いこと |

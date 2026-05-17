@@ -25,6 +25,8 @@ description: Use when integrating pay-per-use services (LLM APIs, cloud function
 
 **2. 負荷試算(最低3シナリオ)**
 
+**前提確認(LLM 等の場合は必須):** 「1呼び出し」の定義を最初に固定する。マルチターン会話で履歴を毎回送る方式なら input が会話ターン数に比例して膨張する(N ターン目の累積 input ≒ 平均 input × N(N+1)/2)。Bedrock / Vertex AI 経由か直接 API かで請求の見え方が変わる(Bedrock 経由は AWS 請求に統合され Budgets で可視化可、直接 API は別請求)。
+
 | シナリオ | DAU | 1人あたり呼び出し | 1回あたり単位消費 | 月額想定 |
 |---|---|---|---|---|
 | 現状 | 10 | 5 | - | $ |
@@ -68,3 +70,4 @@ description: Use when integrating pay-per-use services (LLM APIs, cloud function
 - **output tokenの見落とし:** LLMはinputよりoutputが高額。max_tokensで上限を切る。
 - **再帰的呼び出し:** Lambda → SQS → Lambda の循環で無限課金。トリガー設計を図示して確認。
 - **CloudFront/egressの想定漏れ:** 動画/画像は配信コストが本体より大きくなる。
+- **prompt cache 未使用:** 共通 system prompt をマルチターンで都度フル課金する罠。`cache_control` で書込 1.25倍 / 読込 0.1倍に変えるだけで支配的コストが下がる。会話履歴を全部送る設計の前に必ず検討する。

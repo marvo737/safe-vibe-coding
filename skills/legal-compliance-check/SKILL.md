@@ -37,8 +37,10 @@ description: Use when scraping external sites, collecting personal data, adding 
 
 ### 依存ライブラリ
 - [ ] ライセンス種別を確認(MIT/Apache/BSD は寛容、GPL/AGPL は要注意)
-- [ ] GPL汚染: GPLをリンクすると自作コードもGPL化義務
-- [ ] AGPL: SaaS提供でもソース公開義務
+- [ ] GPL汚染: GPLをリンクすると自作コードもGPL化義務。**別プロセス起動・IPC・CLI 呼び出しでも、密結合(複雑なデータ構造の交換)があれば「単一プログラム」とみなされ得る**(FSF の「single program」判定)。subprocess なら一律安全という素人解釈は禁物
+- [ ] AGPL: SaaS提供でもソース公開義務(GPL は配布トリガー、AGPL はネットワーク提供がトリガー)
+- [ ] **同一プロダクトでもビルドオプション/エディションでライセンスが変わる例に注意**(FFmpeg は `--enable-gpl` で LGPL→GPL、`--enable-nonfree` で再配布不可。MongoDB は SSPL、Elastic は ELv2/SSPL、Qt は LGPL/商用デュアル、MySQL は GPL/商用デュアル)。`<binary> -version` 等で実体のライセンスを確認
+- [ ] **メジャーバージョン更新時もライセンス変更を再確認**(過去事例: MongoDB→SSPL, Elastic→ELv2, Terraform→BSL, HashiCorp 各製品→BSL)
 - [ ] 商用利用可否・帰属表示義務
 
 ### AI生成コンテンツ
